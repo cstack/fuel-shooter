@@ -19,7 +19,7 @@ public class Player : DirectionalEntity {
 			rigidbody.AddForce (thrust * DirectionVector() * Time.deltaTime * thrustForce);
 			ExhaustParticle particle = Instantiate (exhaustPrefab) as ExhaustParticle;
 			particle.transform.position = transform.position;
-			particle.direction = direction + 180 + (30 * (Random.value * 2 - 1));
+			particle.direction = direction + 180 + (15 * (Random.value * 2 - 1));
 			particle.speed = 10f;
 		}
 
