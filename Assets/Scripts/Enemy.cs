@@ -6,6 +6,7 @@ public class Enemy : DirectionalEntity {
 	public float health = 10f;
 
 	public Bullet bulletPrefab;
+	public Fuel fuelPrefab;
 
 	private Player player;
 
@@ -40,6 +41,8 @@ public class Enemy : DirectionalEntity {
 		health -= 1;
 		if (health <= 0) {
 			Destroy(gameObject);
+			Fuel fuel = Instantiate(fuelPrefab) as Fuel;
+			fuel.transform.position = transform.position;
 		}
 	}
 }

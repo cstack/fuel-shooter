@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class DirectionalEntity : MonoBehaviour {
+public class DirectionalEntity : EntityBase {
 	public float direction { // in degrees counterclockwise from Vector3(1,0,0)
 		set {
 			_direction = value;
