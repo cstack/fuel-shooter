@@ -26,4 +26,8 @@ public class Player : DirectionalEntity {
 		float turn = Input.GetAxis ("Horizontal");
 		direction += turn * Time.deltaTime * turnSpeed;
 	}
+
+	public void TakeHit() {
+		
+	}
 }
