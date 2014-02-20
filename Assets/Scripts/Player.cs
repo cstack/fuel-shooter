@@ -48,7 +48,7 @@ public class Player : DirectionalEntity {
 	}
 
 	public void TakeHit() {
-		
+		fuel -= 1;
 	}
 
 	public void RecieveFuel(float amount) {
