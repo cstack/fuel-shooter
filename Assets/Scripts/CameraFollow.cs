@@ -6,11 +6,14 @@ public class CameraFollow : MonoBehaviour {
 	public float u = 0.4f;
 
 	public Enemy enemyPrefab;
+	public Engine[] enginePrefabs;
+	public EnginePickup enginePickupPrefab;
 
 	//private Enemy closestEnemy;
 
 	public void Start() {
 		StartCoroutine (SpawnEnemies ());
+		StartCoroutine (SpawnPowerups ());
 	}
 
 	private Enemy ClosestEnemy() {
@@ -31,6 +34,19 @@ public class CameraFollow : MonoBehaviour {
 			yield return new WaitForSeconds (4f);
 			Enemy enemy = Instantiate (enemyPrefab) as Enemy;
 			enemy.transform.position = new Vector3 (poi.position.x + 50 * (Random.value*2 - 1), poi.position.y + 50 * (Random.value*2 - 1), 0);
+		}
+	}
+
+	public IEnumerator SpawnPowerups() {
+		while (true) {
+			yield return new WaitForSeconds (15f);
+			EnginePickup enginePickup = Instantiate (enginePickupPrefab) as EnginePickup;
+			enginePickup.transform.position = new Vector3 (poi.position.x + 30 * (Random.value*2 - 1), poi.position.y + 30 * (Random.value*2 - 1), 0);
+			int engineType = Random.Range(0,enginePrefabs.Length);
+			Engine engine = Instantiate(enginePrefabs[engineType]) as Engine;
+			enginePickup.engine = engine;
+			engine.transform.position = enginePickup.transform.position;
+			engine.transform.parent = enginePickup.transform;
 		}
 	}
 	
