@@ -28,7 +28,7 @@ public class Enemy : DirectionalEntity {
 				bullet.direction = Mathf.Atan2(displacement.y, displacement.x) * Mathf.Rad2Deg;
 				bullet.speed = 6f;
 			}
-			yield return new WaitForSeconds(3f);
+			yield return new WaitForSeconds(3f - 0.3f*Mathf.Log10(hud.score+1));
 		}
 	}
 	

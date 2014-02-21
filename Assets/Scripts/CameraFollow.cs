@@ -10,9 +10,12 @@ public class CameraFollow : MonoBehaviour {
 	public Engine[] enginePrefabs;
 	public EnginePickup enginePickupPrefab;
 
+	private Player player;
+
 	//private Enemy closestEnemy;
 
 	public void Start() {
+		player = GameObject.Find ("Player").GetComponent<Player> ();
 		StartCoroutine (SpawnEnemies ());
 		StartCoroutine (SpawnPowerups ());
 	}
@@ -43,10 +46,13 @@ public class CameraFollow : MonoBehaviour {
 		while (true) {
 			float powerupTime = 20f - Mathf.Log10(hud.score + 1);
 			yield return new WaitForSeconds (powerupTime);
+
 			EnginePickup enginePickup = Instantiate (enginePickupPrefab) as EnginePickup;
 			enginePickup.transform.position = new Vector3 (poi.position.x + 30 * (Random.value*2 - 1), poi.position.y + 30 * (Random.value*2 - 1), 0);
-			int engineType = Random.Range(0,enginePrefabs.Length);
-			Engine engine = Instantiate(enginePrefabs[engineType]) as Engine;
+
+			Engine engineType = enginePrefabs[Random.Range(0,enginePrefabs.Length)];
+			Engine engine = Instantiate(engineType) as Engine;
+
 			enginePickup.engine = engine;
 			engine.transform.position = enginePickup.transform.position;
 			engine.transform.parent = enginePickup.transform;
