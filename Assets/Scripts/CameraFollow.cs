@@ -4,6 +4,7 @@ using System.Collections;
 public class CameraFollow : MonoBehaviour {
 	public Transform poi;
 	public float u = 0.4f;
+	public HUD hud;
 
 	public Enemy enemyPrefab;
 	public Engine[] enginePrefabs;
@@ -31,7 +32,8 @@ public class CameraFollow : MonoBehaviour {
 
 	public IEnumerator SpawnEnemies() {
 		while (true) {
-			yield return new WaitForSeconds (4f);
+			float spawnTime = 5f - 0.5f * Mathf.Log10(hud.score + 1);
+			yield return new WaitForSeconds (spawnTime);
 			Enemy enemy = Instantiate (enemyPrefab) as Enemy;
 			enemy.transform.position = new Vector3 (poi.position.x + 50 * (Random.value*2 - 1), poi.position.y + 50 * (Random.value*2 - 1), 0);
 		}
@@ -39,7 +41,8 @@ public class CameraFollow : MonoBehaviour {
 
 	public IEnumerator SpawnPowerups() {
 		while (true) {
-			yield return new WaitForSeconds (15f);
+			float powerupTime = 20f - Mathf.Log10(hud.score + 1);
+			yield return new WaitForSeconds (powerupTime);
 			EnginePickup enginePickup = Instantiate (enginePickupPrefab) as EnginePickup;
 			enginePickup.transform.position = new Vector3 (poi.position.x + 30 * (Random.value*2 - 1), poi.position.y + 30 * (Random.value*2 - 1), 0);
 			int engineType = Random.Range(0,enginePrefabs.Length);

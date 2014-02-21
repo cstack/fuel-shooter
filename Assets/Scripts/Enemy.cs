@@ -7,6 +7,7 @@ public class Enemy : DirectionalEntity {
 
 	public Bullet bulletPrefab;
 	public Fuel fuelPrefab;
+	public HUD hud;
 
 	private Player player;
 
@@ -14,6 +15,7 @@ public class Enemy : DirectionalEntity {
 	void Start () {
 		GameObject go = GameObject.Find ("Player");
 		player = go.GetComponent<Player> ();
+		hud = Camera.main.GetComponentInChildren<HUD> ();
 		StartCoroutine (ShootAtPlayer ());
 	}
 

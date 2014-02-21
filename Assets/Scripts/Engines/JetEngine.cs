@@ -13,7 +13,7 @@ public class JetEngine : Engine {
 
 	public override float coneAngle {
 		get {
-			return 5f;
+			return 8f;
 		}
 	}
 

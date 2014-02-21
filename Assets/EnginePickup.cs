@@ -5,7 +5,7 @@ public class EnginePickup : EntityBase {
 	public Engine engine;
 
 	public void Start() {
-		DieAfterTime (30f);
+		StartCoroutine(DieAfterTime (30f));
 	}
 
 	void OnTriggerEnter(Collider other) {

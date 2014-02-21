@@ -3,6 +3,18 @@ using System.Collections;
 
 public class HUD : MonoBehaviour {
 	public GUIText engineName;
+	public GUIText scoreLabel;
+
+	private float _score;
+	public float score {
+		set {
+			_score = value;
+			scoreLabel.text = "Time Survived: " + Utils.RoundToPlaces(_score, 1);
+		}
+		get {
+			return _score;
+		}
+	}
 	
 	private Engine _currentEngine;
 	public Engine currentEngine {

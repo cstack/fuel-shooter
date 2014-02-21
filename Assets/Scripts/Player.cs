@@ -29,6 +29,9 @@ public class Player : DirectionalEntity {
 			_fuel = Mathf.Min(value, maxFuel);
 			_fuel = Mathf.Max(_fuel, 0f);
 			hud.percentFuel = _fuel / maxFuel;
+			if (_fuel <= 0) {
+				OnOutOfFuel();
+			}
 		}
 		get {
 			return _fuel;
@@ -57,13 +60,16 @@ public class Player : DirectionalEntity {
 			particle.speed = engine.particleSpeed;
 
 			fuel -= Time.deltaTime * engine.burnRate;
-			if (fuel <= 0) {
-				Application.LoadLevel(0);
-			}
 		}
 
 		float turn = Input.GetAxis ("Horizontal");
 		direction += turn * Time.deltaTime * turnSpeed;
+
+		hud.score += Time.deltaTime;
+	}
+
+	public void OnOutOfFuel() {
+		Application.LoadLevel(0);
 	}
 
 	public void TakeHit() {
